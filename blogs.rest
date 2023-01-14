@@ -1,0 +1,47 @@
+@baseUrl = http://localhost:3001/api/blogs
+
+# @name getBlogs
+GET {{baseUrl}}
+
+###
+
+# @name createBlog
+POST {{baseUrl}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "author": "Test Author",
+    "title": "Example Blog",
+    "url": "https://example.com/"
+}
+
+###
+@blogId = {{createBlog.response.body.$.id}}
+
+# @name getBlog
+GET {{baseUrl}}/{{blogId}}
+
+###
+
+# @name setLikesZero
+PUT {{baseUrl}}/{{blogId}}
+Content-Type: application/json
+
+{
+    "likes": 0
+}
+
+###
+
+# @name setLikesOne
+PUT {{baseUrl}}/{{blogId}}
+Content-Type: application/json
+
+{
+    "likes": 1
+}
+
+###
+
+# @name deleteBlog
+DELETE {{baseUrl}}/{{blogId}}
