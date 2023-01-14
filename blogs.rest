@@ -45,3 +45,25 @@ Content-Type: application/json
 
 # @name deleteBlog
 DELETE {{baseUrl}}/{{blogId}}
+
+###
+
+
+# @name createBlogTitleMissing
+POST {{baseUrl}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "author": "Test Author",
+    "url": "https://example.com/"
+}
+
+###
+
+# @name setLikesNull
+PUT {{baseUrl}}/{{blogId}}
+Content-Type: application/json
+
+{
+    "likes": null
+}
