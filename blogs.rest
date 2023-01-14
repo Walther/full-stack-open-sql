@@ -1,13 +1,17 @@
-@baseUrl = http://localhost:3001/api/blogs
+@baseUrl = http://localhost:3001/api
+@token = {{login.response.body.$.token}}
+@tokenOther = {{loginOther.response.body.$.token}}
+@blogId = {{createBlog.response.body.$.id}}
 
 # @name getBlogs
-GET {{baseUrl}}
+GET {{baseUrl}}/blogs
 
 ###
 
 # @name createBlog
-POST {{baseUrl}} HTTP/1.1
+POST {{baseUrl}}/blogs
 Content-Type: application/json
+Authorization: bearer {{token}}
 
 {
     "author": "Test Author",
@@ -16,15 +20,14 @@ Content-Type: application/json
 }
 
 ###
-@blogId = {{createBlog.response.body.$.id}}
 
 # @name getBlog
-GET {{baseUrl}}/{{blogId}}
+GET {{baseUrl}}/blogs/{{blogId}}
 
 ###
 
 # @name setLikesZero
-PUT {{baseUrl}}/{{blogId}}
+PUT {{baseUrl}}/blogs/{{blogId}}
 Content-Type: application/json
 
 {
@@ -34,7 +37,7 @@ Content-Type: application/json
 ###
 
 # @name setLikesOne
-PUT {{baseUrl}}/{{blogId}}
+PUT {{baseUrl}}/blogs/{{blogId}}
 Content-Type: application/json
 
 {
@@ -44,13 +47,22 @@ Content-Type: application/json
 ###
 
 # @name deleteBlog
-DELETE {{baseUrl}}/{{blogId}}
+DELETE {{baseUrl}}/blogs/{{blogId}}
+Authorization: bearer {{token}}
+
+
+###
+
+# @name deleteBlogOther
+DELETE {{baseUrl}}/blogs/{{blogId}}
+Authorization: bearer {{tokenOther}}
 
 ###
 
 
 # @name createBlogTitleMissing
-POST {{baseUrl}} HTTP/1.1
+POST {{baseUrl}}/blogs HTTP/1.1
+Authorization: bearer {{token}}
 Content-Type: application/json
 
 {
@@ -61,9 +73,83 @@ Content-Type: application/json
 ###
 
 # @name setLikesNull
-PUT {{baseUrl}}/{{blogId}}
+PUT {{baseUrl}}/blogs/{{blogId}}
 Content-Type: application/json
 
 {
     "likes": null
 }
+
+###
+
+
+# @name getUsers
+GET {{baseUrl}}/users
+
+###
+
+# @name createUser
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "username": "testuser@example.com",
+    "name": "First Last"
+}
+
+###
+
+# @name createUserOther
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "username": "otheruser@example.com",
+    "name": "First Last"
+}
+
+###
+
+# @name createUserNotEmail
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "name": "First Last"
+}
+
+###
+
+# @name login
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "testuser@example.com",
+  "password": "secret"
+}
+
+###
+
+# @name loginOther
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "otheruser@example.com",
+  "password": "secret"
+}
+
+###
+
+# @name renameUser
+PUT {{baseUrl}}/users/testuser@example.com
+Authorization: bearer {{token}}
+
+###
+
+# @name renameUser2
+PUT {{baseUrl}}/users/testuser2@example.com
+Authorization: bearer {{token}}
+ 

@@ -6,23 +6,13 @@ const { PORT } = require("./util/config");
 const { connectToDatabase } = require("./util/db");
 
 const blogRouter = require("./controllers/blog");
+const userRouter = require("./controllers/user");
+const loginRouter = require("./controllers/login");
+const errorHandler = require("./middlewares/errorHandler");
+
 app.use("/api/blogs", blogRouter);
-
-const errorHandler = (error, request, response, next) => {
-  console.log(error.name);
-  console.error(error.message);
-
-  if (error.name === "SequelizeValidationError") {
-    return response.status(400).send({ error: "malformatted content" });
-  }
-
-  if (error.name === "SequelizeDatabaseError") {
-    return response.status(400).send({ error: "malformatted content" });
-  }
-
-  next(error);
-};
-
+app.use("/api/users", userRouter);
+app.use("/api/login", loginRouter);
 app.use(errorHandler);
 
 const start = async () => {
