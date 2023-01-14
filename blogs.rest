@@ -21,8 +21,31 @@ Authorization: bearer {{token}}
 
 ###
 
+# @name createBlog2
+POST {{baseUrl}}/blogs
+Content-Type: application/json
+Authorization: bearer {{tokenOther}}
+
+{
+    "author": "Another Author",
+    "title": "Another Example",
+    "url": "https://example.com/"
+}
+
+###
+
 # @name getBlog
 GET {{baseUrl}}/blogs/{{blogId}}
+
+###
+
+# @name getBlogSearchTest
+GET {{baseUrl}}/blogs/?search=test
+
+###
+
+# @name getBlogSearchExample
+GET {{baseUrl}}/blogs/?search=example
 
 ###
 
@@ -105,7 +128,7 @@ Content-Type: application/json
 
 {
     "username": "otheruser@example.com",
-    "name": "First Last"
+    "name": "First2 Last2"
 }
 
 ###
