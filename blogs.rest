@@ -176,3 +176,7 @@ Authorization: bearer {{token}}
 PUT {{baseUrl}}/users/testuser2@example.com
 Authorization: bearer {{token}}
  
+###
+
+# @name getAuthors
+GET {{baseUrl}}/authors
