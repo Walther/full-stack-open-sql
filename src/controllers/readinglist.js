@@ -1,11 +1,24 @@
 const router = require("express").Router();
 
-const { User, Blog } = require("../models");
+const { User, Readinglist } = require("../models");
 const tokenExtractor = require("../middlewares/tokenExtractor");
 
-router.post("/", tokenExtractor, async (req, res) => {
+router.put("/:id", tokenExtractor, async (req, res) => {
+  const read = req.body.read;
+  if (read === undefined) {
+    res.status(400).json({
+      error: "read status required",
+    });
+  }
   const user = await User.findByPk(req.decodedToken.id);
-  const blog = await Blog.findByPk(req.body.id);
+  const readinglist = await Readinglist.findByPk(req.params.id);
+  if (user.id !== readinglist.userId) {
+    res.status(403).end();
+  }
 
-  res.json({ blogId: blog.id, userId: user.id });
+  readinglist.read = read;
+  readinglist.save();
+  res.json({ read });
 });
+
+module.exports = router;

@@ -187,3 +187,25 @@ Authorization: bearer {{token}}
 
 # @name getAuthors
 GET {{baseUrl}}/authors
+
+###
+
+# @name markRead
+PUT {{baseUrl}}/readinglists/1
+Authorization: bearer {{token}}
+Content-Type: application/json
+
+{
+    "read": true
+}
+
+###
+
+# @name markUnread
+PUT {{baseUrl}}/readinglists/1
+Authorization: bearer {{token}}
+Content-Type: application/json
+
+{
+    "read": false
+}
