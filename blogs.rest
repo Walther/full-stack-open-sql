@@ -118,6 +118,21 @@ GET {{baseUrl}}/users/1
 
 ###
 
+# @name getUserRead
+GET {{baseUrl}}/users/1?read=true
+
+###
+
+# @name getUserUnread
+GET {{baseUrl}}/users/1?read=false
+
+###
+
+# @name getUserBadstate
+GET {{baseUrl}}/users/1?read=other
+
+###
+
 # @name createUser
 POST {{baseUrl}}/users
 Content-Type: application/json
