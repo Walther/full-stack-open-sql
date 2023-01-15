@@ -16,7 +16,8 @@ Authorization: bearer {{token}}
 {
     "author": "Test Author",
     "title": "Example Blog",
-    "url": "https://example.com/"
+    "url": "https://example.com/",
+    "year": 2023
 }
 
 ###
@@ -29,7 +30,8 @@ Authorization: bearer {{tokenOther}}
 {
     "author": "Another Author",
     "title": "Another Example",
-    "url": "https://example.com/"
+    "url": "https://example.com/",
+    "year": 2022
 }
 
 ###
