@@ -11,7 +11,6 @@ const blogFinder = async (req, _res, next) => {
 
 router.get("/", async (req, res) => {
   let where = {};
-  console.log(req.query.search);
 
   if (req.query.search) {
     where = {
