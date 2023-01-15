@@ -113,6 +113,11 @@ GET {{baseUrl}}/users
 
 ###
 
+# @name getUser
+GET {{baseUrl}}/users/1
+
+###
+
 # @name createUser
 POST {{baseUrl}}/users
 Content-Type: application/json
