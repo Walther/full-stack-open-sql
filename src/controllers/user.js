@@ -16,7 +16,8 @@ const userOptions = {
       as: "reading_list",
       attributes: { exclude: ["userId"] },
       through: {
-        attributes: [],
+        attributes: ["id", "read"],
+        as: "status",
       },
       include: {
         model: User,
