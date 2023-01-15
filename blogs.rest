@@ -188,6 +188,18 @@ Content-Type: application/json
 
 ###
 
+# @name logout
+DELETE http://localhost:3001/api/login
+Authorization: bearer {{token}}
+
+###
+
+# @name logoutOther
+DELETE http://localhost:3001/api/login
+Authorization: bearer {{tokenOther}}
+
+###
+
 # @name renameUser
 PUT {{baseUrl}}/users/testuser@example.com
 Authorization: bearer {{token}}
@@ -202,6 +214,17 @@ Authorization: bearer {{token}}
 
 # @name getAuthors
 GET {{baseUrl}}/authors
+
+###
+
+# @name addReadingList
+POST {{baseUrl}}/readinglists
+Authorization: bearer {{token}}
+Content-Type: application/json
+
+{
+    "blogId": 1
+}
 
 ###
 
